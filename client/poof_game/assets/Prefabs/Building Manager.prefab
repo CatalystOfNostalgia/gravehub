@@ -39,10 +39,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a07b713a8b6c3447ba6141a6d311fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windmill: {fileID: 0}
-  pond: {fileID: 0}
-  fire: {fileID: 0}
-  cave: {fileID: 0}
+  windmill: {fileID: 11472614, guid: 60641830e9d1f2047b25c559da4c0028, type: 2}
+  pond: {fileID: 11446534, guid: c232a927cf5121c43b19c3c6bc02bf81, type: 2}
+  fire: {fileID: 11498070, guid: c435b2d2f78f5ae459e636d9f38d37c8, type: 2}
+  cave: {fileID: 11486078, guid: 5ead376afbc113040a2595f82becbb51, type: 2}
   buildingMode: 0
 --- !u!1001 &100100000
 Prefab:

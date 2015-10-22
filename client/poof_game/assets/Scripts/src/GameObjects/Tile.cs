@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour {
     {
         Debug.Log(index.ToString());
         foreach (Tile t in GetAdjacentTiles()) {
-            Debug.Log(t.id);
+            //Debug.Log(t.id);
         }
     }
 

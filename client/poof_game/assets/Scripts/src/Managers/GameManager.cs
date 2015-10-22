@@ -12,6 +12,14 @@ public class GameManager : MonoBehaviour {
     public GameObject airPrefab;
     public GameObject earthPrefab;
 
+    /**
+    public Building fireTreePrefab;
+    public Building windmillPrefab;
+    public Building cavePrefab;
+    public Building pondPrefab;
+    public Building headquartersPrefab;
+    **/
+
     // Store private list of Game Objects
     private List<GameObject> fireActive;
     private List<GameObject> waterActive;
@@ -32,6 +40,17 @@ public class GameManager : MonoBehaviour {
         waterActive = new List<GameObject>();
         earthActive = new List<GameObject>();
         airActive = new List<GameObject>();
+    }
+
+    public void SpawnBuildings()
+    {
+        // Generates buildings from resource list
+        foreach (KeyValuePair<Tuple, Building> pair in SaveState.state.resourceBuildings)
+        {
+            Vector3 target = GetSpawnVector(pair.Key);
+            target.z = target.z - 1;
+            Instantiate(pair.Value, target, Quaternion.identity);
+        }
     }
 
     /**
