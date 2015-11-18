@@ -66,7 +66,7 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	}
 
 	public void OnEndDrag (PointerEventData eventData){
-		BuildingManager.buildingManager.makeNewBuilding(buildingInstance);
+		BuildingManager.buildingManager.makeNewBuilding(this.name);
 		if (draggingIcon != null) {
 			Destroy(draggingIcon);
 		}
@@ -88,8 +88,5 @@ public class ButtonDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 			t = t.parent;
 		}
 		return comp;
-	}
-	// Update is called once per frame
-	void Update () {
 	}
 }

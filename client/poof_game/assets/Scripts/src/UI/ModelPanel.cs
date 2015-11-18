@@ -17,6 +17,7 @@ public class ModelPanel : GamePanel {
     override public void Start()
     {
         buttons = RetrieveButtonList("Model Dialogue Panel/Buttons");
+		BuildingMenuManager.Instance ().populateMenu ();
         GeneratePanel();
     }
 

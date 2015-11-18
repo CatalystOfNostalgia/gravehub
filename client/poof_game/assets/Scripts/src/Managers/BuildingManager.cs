@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 /**
  * Handles all building operations
@@ -15,6 +16,8 @@ public class BuildingManager : Manager {
 	// The dictionary containing all the different types of buildings that can be made
 	Dictionary <string, Building> buildingTypeDict;
 	Dictionary<Tuple, Building> existingBuildingDict;
+
+    Dictionary<string, ResourceBuilding> prefabs;
 
 	// The dictionary containing buildings on the grid
 	public static BuildingManager buildingManager;
@@ -47,7 +50,17 @@ public class BuildingManager : Manager {
         buildings.name = "Buildings";
         buildingTypeDict = new Dictionary<string, Building>();
         existingBuildingDict = new Dictionary<Tuple, Building>();
+        //prefabs = createDictionary();
+        //Debug.Log(prefabs.Keys.ToString());
+    }
 
+    /**
+     * Generates a list of buildings
+     */
+    private Dictionary<string, ResourceBuilding> createDictionary()
+    {
+        Debug.Log(PrefabManager.prefabManager.resourceBuildings.ToString());
+        return PrefabManager.prefabManager.resourceBuildings.ToDictionary(key => key.name, key => key);
     }
 
     /**
@@ -59,16 +72,51 @@ public class BuildingManager : Manager {
         target = PrefabManager.prefabManager.resourceBuildings[buildingNum];
 	}
 
-	/**
+    /**
+     * An overload to handle building conflicts
+     */
+    public void dragNewBuilding(string name, Vector3 cursor)
+    {
+        buildingMode = true;
+        foreach(Building b in PrefabManager.prefabManager.resourceBuildings)
+        {
+            if (b.name == name)
+            {
+                target = b;
+                return;
+            }
+        }
+        Debug.Log(string.Format("The building [{0}] you are trying to map from a button to a physical building was not found", name));
+    }
+
+    /**
 	 * 1. check building cost
 	 * 2. see if user has enough resource to cover the cost
 	 * 3. decrement resource
 	 * 4. build
 	 */
-	public void makeNewBuilding (int buttonNum){
+    public void makeNewBuilding (int buttonNum){
 		buildingMode = true;
         target = PrefabManager.prefabManager.resourceBuildings[buttonNum];
 	}
+
+    /**
+     * Maps the button to a string
+     */
+    public void makeNewBuilding(string name)
+    {
+        buildingMode = true;
+        foreach (Building b in PrefabManager.prefabManager.resourceBuildings)
+        {
+            // Does not work because the buttons have generic names + Button(clone)
+            if (b.name == name)
+            {
+                target = b;
+                return;
+            }
+        }
+        Debug.Log(string.Format("The building [{0}] you are trying to map from a button to a physical building was not found", name));
+    }
 
 	public bool isOccupied (){
 		return false;
