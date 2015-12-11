@@ -130,17 +130,19 @@ public class BuildingPanel : GamePanel {
         ButtonDragScript bds = go.AddComponent<ButtonDragScript>();
 
         // Attach a text object to the button
-        GameObject textObject = new GameObject("Text");
-        Text text = textObject.AddComponent<Text>();
-        textObject.transform.SetParent(go.transform);
+		Image buildingInfo = Instantiate (PrefabManager.prefabManager.buildingInfo);
+		buildingInfo.transform.SetParent (go.transform);
+		buildingInfo.rectTransform.localPosition = new Vector3 (0,40,0);
+		Text text = buildingInfo.GetComponentInChildren<Text> ();
         text.text = b.name;
         text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-        text.alignment = TextAnchor.UpperCenter;
         text.color = Color.black;
 
         // Attach a cost object to the object
-        GameObject costObject = new GameObject("Cost");
-        Text textCost = costObject.AddComponent<Text>();
+		buildingInfo = Instantiate (PrefabManager.prefabManager.buildingInfo);
+		buildingInfo.transform.SetParent (go.transform);
+		buildingInfo.rectTransform.localPosition = new Vector3 (0,-40,0);
+		Text textCost = buildingInfo.GetComponentInChildren<Text> ();
         textCost.transform.SetParent(go.transform);
         ResourceBuildingInformation rbi;
         DecorationBuildingInformation dbi;
@@ -153,7 +155,6 @@ public class BuildingPanel : GamePanel {
             textCost.text = dbi.FireCost + "F," + dbi.WaterCost + "W," + dbi.AirCost + "A," + dbi.EarthCost + "E";
         }
         textCost.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-        textCost.alignment = TextAnchor.LowerCenter;
         textCost.color = Color.black;
 
         // Set the name and parent of the game object

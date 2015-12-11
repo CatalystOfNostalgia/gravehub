@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 /**
  * The prefab manager is a tool which pools together
@@ -23,6 +24,7 @@ public class PrefabManager : Manager {
     public CanvasRenderer[] panels { get; set; }
     public Canvas canvas { get; set; }
 	public Canvas buildingOptionCanvas { get; set; }
+	public Image buildingInfo { get; set; }
 
     // Use this for initialization
     override public void Start () {
@@ -57,6 +59,7 @@ public class PrefabManager : Manager {
         panels = Resources.LoadAll("Prefabs/UI/Panels", typeof(CanvasRenderer)).Cast<CanvasRenderer>().ToArray();
 		canvas = (Canvas)Resources.Load("Prefabs/UI/Canvas", typeof(Canvas));
 		buildingOptionCanvas = (Canvas)Resources.Load ("Prefabs/UI/local Panels/Building Option Canvas", typeof(Canvas));
+		buildingInfo = (Image)Resources.Load ("Prefabs/UI/local Panels/Building Info", typeof(Image));
     }
 
     /**
